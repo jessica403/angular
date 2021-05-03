@@ -1,18 +1,38 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CadastrarComponent } from './cadastrar/cadastrar.component';
-import { EntrarComponent } from './entrar/entrar.component';
 
-const routes: Routes = [
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
 
-  {path: '', redirectTo: 'entrar', pathMatch: 'full'},
+import { AppComponent } from "./app.component";
+import { CadastrarComponent } from "./cadastrar/cadastrar.component";
+import { EntrarComponent } from "./entrar/entrar.component";
+import { MenuComponent } from "./menu/menu.component";
+import { RodapeComponent } from "./rodape/rodape.component";
+import { AppRoutingModule } from './app-routing.module';
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
-  {path:'entrar', component: EntrarComponent },
-  {path:'cadastrar', component: CadastrarComponent}
-];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    RodapeComponent,
+    EntrarComponent,
+    CadastrarComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule,
+    
+   
+  ],
+  providers: [{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }],
+  bootstrap: [AppComponent]
 })
-export class AppRoutingModule { }
+export class AppModule { }
